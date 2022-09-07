@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Layout from './Layout/Layout';
+import NavbarCom from './components/NavbarCom';
 
 type type = {
   users: string[];
@@ -17,11 +19,13 @@ function App() {
 
   return (
     <>
-      {backendData === undefined ? (
+      {/* {backendData === undefined ? (
         <p>Loading...</p>
       ) : (
         backendData.users.map((user, index) => <p key={index}>{user}</p>)
-      )}
+      )} */}
+      <NavbarCom />
+      <Layout />
     </>
   );
 }
