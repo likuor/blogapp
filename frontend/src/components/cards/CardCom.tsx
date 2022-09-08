@@ -1,24 +1,47 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
+
 import Card from 'react-bootstrap/Card';
 
+interface Props {
+  title: string;
+  contents: string;
+  caption: string;
+  _id: string;
+}
+
 const CardCom: FC = () => {
+  const [backendData, setBackendData] = useState<Props[] | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    fetch('/api/v1/posts')
+      .then((response) => response.json())
+      .then((data) => {
+        setBackendData(data);
+      });
+  }, []);
+
   return (
-    <Card>
-      <Card.Img
-        variant='top'
-        src={`${process.env.PUBLIC_URL}/image/blogSample.jpg`}
-      />
-      <Card.Body>
-        <Card.Title>Card title</Card.Title>
-        <Card.Text>
-          This is a wider card with supporting text below as a natural lead-in
-          to additional content. This content is a little bit longer.
-        </Card.Text>
-      </Card.Body>
-      <Card.Footer>
-        <small className='text-muted'>Last updated 3 mins ago</small>
-      </Card.Footer>
-    </Card>
+    <>
+      {backendData
+        ? backendData.map((card) => (
+            <Card key={card._id}>
+              <Card.Img
+                variant='top'
+                src={`${process.env.PUBLIC_URL}/image/blogSample.jpg`}
+              />
+              <Card.Body>
+                <Card.Title>{card.title}</Card.Title>
+                <Card.Text>{card.caption}</Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                <small className='text-muted'>Last updated 3 mins ago</small>
+              </Card.Footer>
+            </Card>
+          ))
+        : 'Loading ...'}
+    </>
   );
 };
 

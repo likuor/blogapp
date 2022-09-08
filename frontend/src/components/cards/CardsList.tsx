@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
+
 import CardGroup from 'react-bootstrap/CardGroup';
 import CardCom from './CardCom';
 
-const CardsList = () => {
+const CardsList: FC = () => {
   return (
     <CardGroup>
-      <CardCom />
-      <CardCom />
       <CardCom />
     </CardGroup>
   );
