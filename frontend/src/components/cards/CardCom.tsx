@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
-
 import Card from 'react-bootstrap/Card';
+import axios from 'axios';
 
 interface Props {
   title: string;
@@ -15,12 +15,13 @@ const CardCom: FC = () => {
   );
 
   useEffect(() => {
-    fetch('/api/v1/posts')
-      .then((response) => response.json())
-      .then((data) => {
-        setBackendData(data);
-      });
-  }, []);
+    axios
+      .get('/api/v1/posts')
+      .then((response: any) => {
+        setBackendData(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, [backendData]);
 
   return (
     <>

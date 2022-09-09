@@ -1,13 +1,15 @@
 import React, { FC } from 'react';
-
 import CardGroup from 'react-bootstrap/CardGroup';
 import CardCom from './CardCom';
+import Layout from '../../Layout/Layout';
 
 const CardsList: FC = () => {
   return (
-    <CardGroup>
-      <CardCom />
-    </CardGroup>
+    <Layout>
+      <CardGroup>
+        <CardCom />
+      </CardGroup>
+    </Layout>
   );
 };
 
