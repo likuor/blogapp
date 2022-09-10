@@ -1,31 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import Layout from './Layout/Layout';
+import React from 'react';
 import NavbarCom from './components/NavbarCom';
-
-type type = {
-  users: string[];
-};
+import { Routes, Route } from 'react-router-dom';
+import FormCom from './components/form/FormCom';
+import Home from './pages/Home';
 
 function App() {
-  const [backendData, setBackendData] = useState<type>();
-
-  useEffect(() => {
-    fetch('/api')
-      .then((response) => response.json())
-      .then((data) => {
-        setBackendData(data);
-      });
-  }, []);
-
   return (
     <>
-      {/* {backendData === undefined ? (
-        <p>Loading...</p>
-      ) : (
-        backendData.users.map((user, index) => <p key={index}>{user}</p>)
-      )} */}
       <NavbarCom />
-      <Layout />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/create' element={<FormCom />} />
+      </Routes>
     </>
   );
 }
