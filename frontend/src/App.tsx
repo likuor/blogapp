@@ -2,14 +2,14 @@ import React from 'react';
 import NavbarCom from './components/NavbarCom';
 import { Routes, Route } from 'react-router-dom';
 import FormCom from './components/form/FormCom';
-import CardsList from './components/cards/CardsList';
+import Home from './pages/Home';
 
 function App() {
   return (
     <>
       <NavbarCom />
       <Routes>
-        <Route path='/' element={<CardsList />} />
+        <Route path='/' element={<Home />} />
         <Route path='/create' element={<FormCom />} />
       </Routes>
     </>
