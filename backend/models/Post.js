@@ -16,6 +16,9 @@ const PostSchema = new mongoose.Schema({
     required: true,
     maxLength: 400,
   },
+  time: {
+    type: Number,
+  },
 });
 
 module.exports = mongoose.model('Post', PostSchema);

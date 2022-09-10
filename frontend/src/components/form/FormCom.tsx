@@ -10,10 +10,12 @@ const FormCom: FC = () => {
   const refContents = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
+    const date = new Date().getTime();
     const newPost = {
       title: refText.current?.value,
       caption: refCaption.current?.value,
       contents: refContents.current?.value,
+      time: date,
     };
 
     axios

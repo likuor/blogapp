@@ -1,8 +1,9 @@
 import React from 'react';
 import NavbarCom from './components/NavbarCom';
 import { Routes, Route } from 'react-router-dom';
-import FormCom from './components/form/FormCom';
 import Home from './pages/Home';
+import CreatePostCom from './pages/CreatePostCom';
+import CardDetailCom from './pages/CardDetailCom';
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       <NavbarCom />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/create' element={<FormCom />} />
+        <Route path='/create' element={<CreatePostCom />} />
+        <Route path='/detail/:id' element={<CardDetailCom />} />
       </Routes>
     </>
   );
