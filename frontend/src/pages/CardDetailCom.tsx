@@ -40,6 +40,10 @@ const CardDetailCom: FC = () => {
     }
   };
 
+  const deleteBlog = () => {
+    console.log('delete');
+  };
+
   return (
     <Container>
       <Row className='justify-content-center'>
@@ -47,7 +51,7 @@ const CardDetailCom: FC = () => {
           <>
             <h1>{blogData.title}</h1> <span>{renderTime()}</span>
             <span>
-              <ButtonCom color='danger' />
+              <ButtonCom color='danger' onClick={() => deleteBlog()} />
             </span>
             <Col md={7}>{blogData.contents}</Col>
             <Col md={5}>
