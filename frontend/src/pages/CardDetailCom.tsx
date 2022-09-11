@@ -5,6 +5,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
+import SpinnerCom from '../components/SpinnerCom';
+import ButtonCom from '../components/ButtonCom';
 
 interface blogObj {
   title: string;
@@ -40,18 +42,34 @@ const CardDetailCom: FC = () => {
 
   return (
     <Container>
-      {blogData && (
-        <Row>
-          <h1>{blogData.title}</h1> <span>{renderTime()}</span>
-          <Col>{blogData.contents}</Col>
-          <Col>
-            <Image
-              fluid
-              src={`${process.env.PUBLIC_URL}/image/blogSample.jpg`}
-            />
+      <Row className='justify-content-center'>
+        {blogData ? (
+          <>
+            <h1>{blogData.title}</h1> <span>{renderTime()}</span>
+            <span>
+              <ButtonCom color='danger' />
+            </span>
+            <Col md={7}>{blogData.contents}</Col>
+            <Col md={5}>
+              <Image
+                fluid
+                src={`${process.env.PUBLIC_URL}/image/blogSample.jpg`}
+              />
+            </Col>
+          </>
+        ) : (
+          <Col
+            xs='auto'
+            style={{
+              height: '80vh',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <SpinnerCom />
           </Col>
-        </Row>
-      )}
+        )}
+      </Row>
     </Container>
   );
 };

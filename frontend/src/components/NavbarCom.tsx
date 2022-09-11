@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 const NavbarCom: FC = () => {
   return (
-    <Navbar bg='light' expand='lg'>
+    <Navbar bg='light' expand='md'>
       <Container>
         <Navbar.Brand as={NavLink} to='/'>
           Blog app
