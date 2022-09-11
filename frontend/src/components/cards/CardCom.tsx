@@ -8,7 +8,7 @@ interface DataProps {
     contents: string;
     caption: string;
     _id: string;
-    time: number;
+    updatedAt: string;
   };
 }
 
@@ -21,7 +21,7 @@ const CardCom: FC<DataProps> = (props) => {
   };
 
   const renderTime = () => {
-    const date = new Date(blog.time);
+    const date = new Date(blog.updatedAt);
     return date.toLocaleString();
   };
 

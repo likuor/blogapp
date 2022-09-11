@@ -11,7 +11,7 @@ interface blogObj {
   contents: string;
   caption: string;
   _id: string;
-  time: number;
+  updatedAt: string;
 }
 
 const AllCards: FC = () => {
@@ -19,7 +19,7 @@ const AllCards: FC = () => {
 
   useEffect(() => {
     axios
-      .get('/api/v1/posts')
+      .get('/api/posts')
       .then((response: any) => {
         setBlogData(response.data);
       })

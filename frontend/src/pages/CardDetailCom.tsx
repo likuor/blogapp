@@ -13,7 +13,7 @@ interface blogObj {
   contents: string;
   caption: string;
   _id: string;
-  time: number;
+  updatedAt: string;
 }
 
 const CardDetailCom: FC = () => {
@@ -22,7 +22,7 @@ const CardDetailCom: FC = () => {
 
   useEffect(() => {
     axios
-      .get('/api/v1/posts')
+      .get('/api/posts')
       .then((response: any) => {
         const filterdData = response.data.filter(
           (blog: blogObj) => blog._id === params.id
@@ -35,7 +35,7 @@ const CardDetailCom: FC = () => {
 
   const renderTime = () => {
     if (blogData) {
-      const date = new Date(blogData.time);
+      const date = new Date(blogData.updatedAt);
       return date.toLocaleString();
     }
   };
