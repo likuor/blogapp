@@ -10,16 +10,15 @@ const FormCom: FC = () => {
   const refContents = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
-    const date = new Date().getTime();
     const newPost = {
+      userId: '631e65e323a2a69dbf7622cb',
       title: refText.current?.value,
       caption: refCaption.current?.value,
       contents: refContents.current?.value,
-      time: date,
     };
 
     axios
-      .post('/api/v1/post', newPost)
+      .post('/api/posts/create', newPost)
       .then((response: any) => {
         console.log(response);
       })
