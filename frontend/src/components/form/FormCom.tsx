@@ -11,13 +11,14 @@ const FormCom: FC = () => {
 
   const handleSubmit = () => {
     const newPost = {
+      userId: '631e65e323a2a69dbf7622cb',
       title: refText.current?.value,
       caption: refCaption.current?.value,
       contents: refContents.current?.value,
     };
 
     axios
-      .post('/api/v1/post', newPost)
+      .post('/api/posts/create', newPost)
       .then((response: any) => {
         console.log(response);
       })

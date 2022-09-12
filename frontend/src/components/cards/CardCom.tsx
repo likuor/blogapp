@@ -1,21 +1,32 @@
 import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 
 interface DataProps {
   blog: {
-    title: string | undefined;
+    title: string;
     contents: string;
     caption: string;
     _id: string;
+    updatedAt: string;
   };
 }
 
 const CardCom: FC<DataProps> = (props) => {
   const { blog } = props;
-  console.log(blog);
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate(`/detail/${blog._id}`);
+  };
+
+  const renderTime = () => {
+    const date = new Date(blog.updatedAt);
+    return date.toLocaleString();
+  };
 
   return (
-    <Card>
+    <Card onClick={onClick} style={{ cursor: 'pointer' }}>
       <Card.Img
         variant='top'
         src={`${process.env.PUBLIC_URL}/image/blogSample.jpg`}
@@ -25,7 +36,7 @@ const CardCom: FC<DataProps> = (props) => {
         <Card.Text>{blog.caption}</Card.Text>
       </Card.Body>
       <Card.Footer>
-        <small className='text-muted'>Last updated 3 mins ago</small>
+        <small className='text-muted'>Last updated {renderTime()}</small>
       </Card.Footer>
     </Card>
   );
