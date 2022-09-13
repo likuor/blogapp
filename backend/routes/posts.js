@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
 const Post = require('../models/Post');
+const User = require('../models/User');
 const router = require('express').Router();
 
 // get all article
 router.get('/', async (req, res) => {
   try {
+    // const currentUser = await User.findById(req.body.userId);
+    // console.log(currentUser);
     const allPosts = await Post.find({});
     return res.status(200).json(allPosts);
   } catch (err) {

@@ -8,7 +8,7 @@ import Image from 'react-bootstrap/Image';
 import SpinnerCom from '../components/SpinnerCom';
 import ButtonCom from '../components/ButtonCom';
 
-interface blogObj {
+interface articleObj {
   title: string;
   contents: string;
   caption: string;
@@ -17,25 +17,24 @@ interface blogObj {
 }
 
 const CardDetailCom: FC = () => {
-  const [blogData, setBlogData] = useState<blogObj | undefined>(undefined);
+  const [article, setArticle] = useState<articleObj | undefined>(undefined);
   const params = useParams();
 
   useEffect(() => {
-    axios
-      .get('/api/posts')
-      .then((response: any) => {
-        const filterdData = response.data.filter(
-          (blog: blogObj) => blog._id === params.id
-        );
-        const data = filterdData[0];
-        setBlogData(data);
-      })
-      .catch((error) => console.log(error));
+    const fetchArticles = async () => {
+      const response = await axios.get('/posts');
+      const filterdData = response.data.filter(
+        (article: articleObj) => article._id === params.id
+      );
+      const data = filterdData[0];
+      setArticle(data);
+    };
+    fetchArticles();
   }, [params]);
 
   const renderTime = () => {
-    if (blogData) {
-      const date = new Date(blogData.updatedAt);
+    if (article) {
+      const date = new Date(article.updatedAt);
       return date.toLocaleString();
     }
   };
@@ -47,9 +46,9 @@ const CardDetailCom: FC = () => {
   return (
     <Container>
       <Row className='justify-content-center'>
-        {blogData ? (
+        {article ? (
           <>
-            <h1>{blogData.title}</h1> <span>{renderTime()}</span>
+            <h1>{article.title}</h1> <span>{renderTime()}</span>
             <span>
               <ButtonCom
                 color='danger'
@@ -57,7 +56,7 @@ const CardDetailCom: FC = () => {
                 onClick={() => deleteBlog()}
               />
             </span>
-            <Col md={7}>{blogData.contents}</Col>
+            <Col md={7}>{article.contents}</Col>
             <Col md={5}>
               <Image
                 fluid
