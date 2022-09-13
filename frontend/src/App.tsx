@@ -6,6 +6,7 @@ import CreatePostCom from './pages/CreatePostCom';
 import CardDetailCom from './pages/CardDetailCom';
 import LoginCom from './pages/LoginCom';
 import SignupCom from './pages/SignupCom';
+import ProfileCom from './pages/ProfileCom';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/create' element={<CreatePostCom />} />
         <Route path='/detail/:id' element={<CardDetailCom />} />
         <Route path='/login' element={<LoginCom />} />
+        <Route path='/mypage/:id' element={<ProfileCom />} />
         <Route path='/signup' element={<SignupCom />} />
       </Routes>
     </>
