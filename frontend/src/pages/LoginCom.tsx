@@ -10,7 +10,7 @@ const LoginCom: FC = () => {
       <LoginFormCom />
       <Link to={'/forgotpassword'}>forgot password?</Link>
       <Link to={'/signup'}>
-        <ButtonCom color='success' text='Sign up' />
+        <ButtonCom color='success' text='Sign up' type='button' />
       </Link>
     </Layout>
   );

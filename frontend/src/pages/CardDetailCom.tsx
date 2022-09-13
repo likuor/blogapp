@@ -54,6 +54,7 @@ const CardDetailCom: FC = () => {
                 color='danger'
                 text='Delete'
                 onClick={() => deleteBlog()}
+                type='submit'
               />
             </span>
             <Col md={7}>{article.contents}</Col>

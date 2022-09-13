@@ -9,7 +9,7 @@ const SignupCom: FC = () => {
     <Layout>
       <SignupFormCom />
       <Link to={'/login'}>
-        <ButtonCom color='success' text='Login' />
+        <ButtonCom color='success' text='Login' type='button' />
       </Link>
     </Layout>
   );
