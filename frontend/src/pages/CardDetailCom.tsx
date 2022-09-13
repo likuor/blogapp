@@ -51,7 +51,11 @@ const CardDetailCom: FC = () => {
           <>
             <h1>{blogData.title}</h1> <span>{renderTime()}</span>
             <span>
-              <ButtonCom color='danger' onClick={() => deleteBlog()} />
+              <ButtonCom
+                color='danger'
+                text='Delete'
+                onClick={() => deleteBlog()}
+              />
             </span>
             <Col md={7}>{blogData.contents}</Col>
             <Col md={5}>

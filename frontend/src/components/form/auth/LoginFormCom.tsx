@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Button from 'react-bootstrap/Button';
+import ButtonCom from '../../../components/ButtonCom';
 import Form from 'react-bootstrap/Form';
 
 const LoginFormCom: FC = () => {
@@ -18,9 +18,7 @@ const LoginFormCom: FC = () => {
         <Form.Control type='password' placeholder='Password' />
       </Form.Group>
 
-      <Button variant='primary' type='submit'>
-        Login
-      </Button>
+      <ButtonCom color='primary' text='Login' />
     </Form>
   );
 };
