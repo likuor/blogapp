@@ -25,7 +25,7 @@ const NavbarCom: FC = () => {
               Add Post
             </Nav.Link>
             <NavDropdown title='Setting' id='basic-nav-dropdown'>
-              <NavDropdown.Item as={NavLink} to='mypage'>
+              <NavDropdown.Item as={NavLink} to='/mypage'>
                 My page
               </NavDropdown.Item>
               <NavDropdown.Divider />

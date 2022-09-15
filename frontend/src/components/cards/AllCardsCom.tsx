@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import SpinnerCom from '../SpinnerCom';
 
-interface blogObj {
+interface articleObj {
   title: string;
   contents: string;
   caption: string;
@@ -15,24 +15,23 @@ interface blogObj {
 }
 
 const AllCards: FC = () => {
-  const [blogData, setBlogData] = useState<blogObj[] | undefined>(undefined);
+  const [articles, setArticles] = useState<articleObj[] | undefined>(undefined);
 
   useEffect(() => {
-    axios
-      .get('/api/posts')
-      .then((response: any) => {
-        setBlogData(response.data);
-      })
-      .catch((error) => console.log(error));
+    const fetchArticles = async () => {
+      const response = await axios.get('/posts');
+      setArticles(response.data);
+    };
+    fetchArticles();
   }, []);
 
   return (
     <Row className='justify-content-center'>
-      {blogData ? (
+      {articles ? (
         <CardGroup>
-          {blogData.map((blog: any) => (
-            <Col sm={6} md={4} key={blog._id}>
-              <CardCom blog={blog} />
+          {articles.map((article: any) => (
+            <Col sm={6} md={4} key={article._id}>
+              <CardCom article={article} />
             </Col>
           ))}
         </CardGroup>

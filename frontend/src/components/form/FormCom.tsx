@@ -18,7 +18,7 @@ const FormCom: FC = () => {
     };
 
     axios
-      .post('/api/posts/create', newPost)
+      .post('/posts/create', newPost)
       .then((response: any) => {
         console.log(response);
       })
