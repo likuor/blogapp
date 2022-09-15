@@ -1,17 +1,19 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, useContext } from 'react';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Layout from '../../Layout/Layout';
+import { AuthContext } from '../../state/AuthContext';
+import Button from '../ButtonCom';
 
 const FormCom: FC = () => {
+  const { user } = useContext(AuthContext);
   const refText = useRef<HTMLInputElement>(null);
   const refCaption = useRef<HTMLInputElement>(null);
   const refContents = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
     const newPost = {
-      userId: '631e65e323a2a69dbf7622cb',
+      userId: user._id,
       title: refText.current?.value,
       caption: refCaption.current?.value,
       contents: refContents.current?.value,
@@ -44,9 +46,13 @@ const FormCom: FC = () => {
             ref={refContents}
           />
         </Form.Group>
-        <Button variant='primary' type='submit' onClick={handleSubmit}>
-          Post
-        </Button>
+
+        <Button
+          text='Post'
+          color='primary'
+          type='submit'
+          onClick={handleSubmit}
+        />
       </Form>
     </Layout>
   );

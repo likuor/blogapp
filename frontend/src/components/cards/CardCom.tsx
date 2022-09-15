@@ -7,6 +7,7 @@ interface DataProps {
     title: string;
     contents: string;
     caption: string;
+    userId: string;
     _id: string;
     updatedAt: string;
   };
@@ -34,6 +35,7 @@ const CardCom: FC<DataProps> = (props) => {
       <Card.Body>
         <Card.Title>{article.title}</Card.Title>
         <Card.Text>{article.caption}</Card.Text>
+        <Card.Text>{article.userId}</Card.Text>
       </Card.Body>
       <Card.Footer>
         <small className='text-muted'>Last updated {renderTime()}</small>

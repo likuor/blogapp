@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
@@ -7,27 +7,28 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import SpinnerCom from '../components/SpinnerCom';
 import ButtonCom from '../components/ButtonCom';
+import { AuthContext } from '../state/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface articleObj {
   title: string;
   contents: string;
   caption: string;
   _id: string;
+  userId: string;
   updatedAt: string;
 }
 
 const CardDetailCom: FC = () => {
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const [article, setArticle] = useState<articleObj | undefined>(undefined);
   const params = useParams();
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const response = await axios.get('/posts');
-      const filterdData = response.data.filter(
-        (article: articleObj) => article._id === params.id
-      );
-      const data = filterdData[0];
-      setArticle(data);
+      const response = await axios.get(`/posts/${params.id}`);
+      setArticle(response.data);
     };
     fetchArticles();
   }, [params]);
@@ -39,8 +40,16 @@ const CardDetailCom: FC = () => {
     }
   };
 
-  const deleteBlog = () => {
-    console.log('delete');
+  const deleteArticle = async () => {
+    await axios.delete(`/posts/${params.id}`, user);
+    navigate('/');
+  };
+
+  const editArticle = async () => {
+    console.log('edit');
+
+    // await axios.put(`/posts/${params.id}`, user);
+    // navigate('/');
   };
 
   return (
@@ -49,14 +58,26 @@ const CardDetailCom: FC = () => {
         {article ? (
           <>
             <h1>{article.title}</h1> <span>{renderTime()}</span>
-            <span>
-              <ButtonCom
-                color='danger'
-                text='Delete'
-                onClick={() => deleteBlog()}
-                type='submit'
-              />
-            </span>
+            {user && user._id === article.userId && (
+              <span>
+                <ButtonCom
+                  color='success'
+                  text='Edit'
+                  onClick={editArticle}
+                  type='submit'
+                />
+              </span>
+            )}
+            {user && user._id === article.userId && (
+              <span>
+                <ButtonCom
+                  color='danger'
+                  text='Delete'
+                  onClick={deleteArticle}
+                  type='submit'
+                />
+              </span>
+            )}
             <Col md={7}>{article.contents}</Col>
             <Col md={5}>
               <Image
