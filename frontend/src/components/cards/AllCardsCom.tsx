@@ -23,7 +23,7 @@ const AllCards: FC = () => {
       setArticles(response.data);
     };
     fetchArticles();
-  }, [setArticles]);
+  }, []);
 
   return (
     <Row className='justify-content-center'>

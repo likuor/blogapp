@@ -41,15 +41,12 @@ const CardDetailCom: FC = () => {
   };
 
   const deleteArticle = async () => {
-    await axios.delete(`/posts/${params.id}`, user);
+    await axios.delete(`/posts/${params.id}`);
     navigate('/');
   };
 
   const editArticle = async () => {
     console.log('edit');
-
-    // await axios.put(`/posts/${params.id}`, user);
-    // navigate('/');
   };
 
   return (

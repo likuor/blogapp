@@ -5,15 +5,30 @@ import Layout from '../../Layout/Layout';
 import { AuthContext } from '../../state/AuthContext';
 import Button from '../ButtonCom';
 
+interface LoginState {
+  user: {
+    createdAt: string;
+    description: string;
+    email: string;
+    isAdmin: boolean;
+    password: string;
+    profilePicture: string;
+    updatedAt: string;
+    username: string;
+    __v?: number;
+    _id: string | null;
+  } | null;
+}
+
 const FormCom: FC = () => {
-  const { user } = useContext(AuthContext);
+  const { user }: LoginState = useContext(AuthContext);
   const refText = useRef<HTMLInputElement>(null);
   const refCaption = useRef<HTMLInputElement>(null);
   const refContents = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
     const newPost = {
-      userId: user._id,
+      userId: user?._id,
       title: refText.current?.value,
       caption: refCaption.current?.value,
       contents: refContents.current?.value,

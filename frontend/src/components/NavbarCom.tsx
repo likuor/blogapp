@@ -1,11 +1,23 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { logoutCall } from '../dispatch';
+import { AuthContext } from '../state/AuthContext';
 
 const NavbarCom: FC = () => {
+  const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
+
+  const hancleLogiout = () => {
+    localStorage.removeItem('user');
+    logoutCall(dispatch);
+    navigate('/login');
+  };
+
   return (
     <Navbar bg='light' expand='md'>
       <Container>
@@ -29,7 +41,9 @@ const NavbarCom: FC = () => {
                 My page
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href='#action/3.4'>Logout</NavDropdown.Item>
+              <NavDropdown.Item onClick={hancleLogiout}>
+                Logout
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
