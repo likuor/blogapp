@@ -14,3 +14,7 @@ export const loginCall = async (user: LoginValue, dispatch: any) => {
     dispatch({ type: 'LOGIN_ERROR', payload: err });
   }
 };
+
+export const logoutCall = async (dispatch: any) => {
+  dispatch({ type: 'LOGIN_START' });
+};

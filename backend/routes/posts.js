@@ -7,8 +7,6 @@ const router = require('express').Router();
 // get all article
 router.get('/', async (req, res) => {
   try {
-    // const currentUser = await User.findById(req.body.userId);
-    // console.log(currentUser);
     const allPosts = await Post.find({});
     return res.status(200).json(allPosts);
   } catch (err) {
@@ -17,7 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-//get single article
+//get single article detail
 router.get('/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -59,12 +57,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (post.userId === req.body.userId) {
-      await post.deleteOne();
-      return res.status(200).json(post);
-    } else {
-      return res.status(403).send('Article can not be deleted');
-    }
+    await post.deleteOne();
   } catch (err) {
     console.log('ERROR EDIT AN ARTICLE', err);
     return res.status(403).json(err);

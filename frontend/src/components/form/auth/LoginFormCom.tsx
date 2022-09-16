@@ -7,7 +7,7 @@ import { AuthContext } from '../../../state/AuthContext';
 const LoginFormCom: FC = () => {
   const refEmail = useRef<HTMLInputElement>(null);
   const refPassword = useRef<HTMLInputElement>(null);
-  const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -19,7 +19,6 @@ const LoginFormCom: FC = () => {
       dispatch
     );
   };
-  console.log(user);
 
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
