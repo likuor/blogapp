@@ -9,6 +9,7 @@ import SpinnerCom from '../components/SpinnerCom';
 import ButtonCom from '../components/ButtonCom';
 import { AuthContext } from '../state/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import ModalCom from '../components/ModalCom';
 
 interface articleObj {
   title: string;
@@ -20,6 +21,7 @@ interface articleObj {
 }
 
 const CardDetailCom: FC = () => {
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [article, setArticle] = useState<articleObj | undefined>(undefined);
@@ -47,6 +49,7 @@ const CardDetailCom: FC = () => {
 
   const editArticle = async () => {
     console.log('edit');
+    setShow(true);
   };
 
   return (
@@ -56,14 +59,17 @@ const CardDetailCom: FC = () => {
           <>
             <h1>{article.title}</h1> <span>{renderTime()}</span>
             {user && user._id === article.userId && (
-              <span>
-                <ButtonCom
-                  color='success'
-                  text='Edit'
-                  onClick={editArticle}
-                  type='submit'
-                />
-              </span>
+              <>
+                <span>
+                  <ButtonCom
+                    color='success'
+                    text='Edit'
+                    onClick={editArticle}
+                    type='submit'
+                  />
+                </span>
+                <ModalCom show={show} setShow={setShow} article={article} />
+              </>
             )}
             {user && user._id === article.userId && (
               <span>
