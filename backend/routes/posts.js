@@ -1,7 +1,7 @@
 const express = require('express');
-const app = express();
+// const app = express();
 const Post = require('../models/Post');
-const User = require('../models/User');
+// const User = require('../models/User');
 const router = require('express').Router();
 
 // get all article
@@ -58,6 +58,7 @@ router.delete('/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     await post.deleteOne();
+    return res.status(200).json(post);
   } catch (err) {
     console.log('ERROR EDIT AN ARTICLE', err);
     return res.status(403).json(err);

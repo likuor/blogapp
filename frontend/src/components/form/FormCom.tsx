@@ -3,7 +3,8 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import Layout from '../../Layout/Layout';
 import { AuthContext } from '../../state/AuthContext';
-import Button from '../ButtonCom';
+import ButtonCom from '../ButtonCom';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginState {
   user: {
@@ -21,6 +22,7 @@ interface LoginState {
 }
 
 const FormCom: FC = () => {
+  const navigate = useNavigate();
   const { user }: LoginState = useContext(AuthContext);
   const refText = useRef<HTMLInputElement>(null);
   const refCaption = useRef<HTMLInputElement>(null);
@@ -36,8 +38,8 @@ const FormCom: FC = () => {
 
     axios
       .post('/posts/create', newPost)
-      .then((response: any) => {
-        console.log(response);
+      .then(() => {
+        navigate('/');
       })
       .catch((error) => console.log('error', error));
   };
@@ -61,14 +63,13 @@ const FormCom: FC = () => {
             ref={refContents}
           />
         </Form.Group>
-
-        <Button
-          text='Post'
-          color='primary'
-          type='submit'
-          onClick={handleSubmit}
-        />
       </Form>
+      <ButtonCom
+        text='Post'
+        color='primary'
+        type='submit'
+        onClick={handleSubmit}
+      />
     </Layout>
   );
 };

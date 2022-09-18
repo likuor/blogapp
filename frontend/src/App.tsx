@@ -16,7 +16,7 @@ function App() {
     <>
       <NavbarCom />
       <Routes>
-        <Route path='/' element={user ? <Home /> : <SignupCom />} />
+        <Route path='/' element={user ? <Home /> : <LoginCom />} />
         <Route
           path='/create'
           element={user ? <CreatePostCom /> : <LoginCom />}
