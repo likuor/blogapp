@@ -21,7 +21,8 @@ interface articleObj {
 }
 
 const CardDetailCom: FC = () => {
-  const [show, setShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [isUpdated, setIsUpdated] = useState(false);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [article, setArticle] = useState<articleObj | undefined>(undefined);
@@ -33,7 +34,7 @@ const CardDetailCom: FC = () => {
       setArticle(response.data);
     };
     fetchArticles();
-  }, [params]);
+  }, [params, isUpdated]);
 
   const renderTime = () => {
     if (article) {
@@ -42,14 +43,17 @@ const CardDetailCom: FC = () => {
     }
   };
 
-  const deleteArticle = async () => {
-    await axios.delete(`/posts/${params.id}`);
-    navigate('/');
+  const deleteArticle = () => {
+    axios
+      .delete(`/posts/${params.id}`)
+      .then(() => {
+        navigate('/');
+      })
+      .catch((error) => console.log('error', error));
   };
 
-  const editArticle = async () => {
-    console.log('edit');
-    setShow(true);
+  const editArticle = () => {
+    setShowModal(true);
   };
 
   return (
@@ -58,35 +62,41 @@ const CardDetailCom: FC = () => {
         {article ? (
           <>
             <h1>{article.title}</h1> <span>{renderTime()}</span>
-            {user && user._id === article.userId && (
-              <>
-                <span>
-                  <ButtonCom
-                    color='success'
-                    text='Edit'
-                    onClick={editArticle}
-                    type='submit'
-                  />
-                </span>
-                <ModalCom show={show} setShow={setShow} article={article} />
-              </>
-            )}
-            {user && user._id === article.userId && (
-              <span>
-                <ButtonCom
-                  color='danger'
-                  text='Delete'
-                  onClick={deleteArticle}
-                  type='submit'
-                />
-              </span>
-            )}
             <Col md={7}>{article.contents}</Col>
             <Col md={5}>
               <Image
                 fluid
                 src={`${process.env.PUBLIC_URL}/image/blogSample.jpg`}
               />
+            </Col>
+            <Col>
+              {user && user._id === article.userId && (
+                <>
+                  <span>
+                    <ButtonCom
+                      color='success'
+                      text='Edit'
+                      onClick={editArticle}
+                      type='submit'
+                    />
+                  </span>
+                  <span>
+                    <ButtonCom
+                      color='danger'
+                      text='Delete'
+                      onClick={deleteArticle}
+                      type='submit'
+                    />
+                  </span>
+                  <ModalCom
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                    isUpdated={isUpdated}
+                    setIsUpdated={setIsUpdated}
+                    article={article}
+                  />
+                </>
+              )}
             </Col>
           </>
         ) : (
