@@ -11,6 +11,12 @@ interface articleObj {
   contents: string;
   caption: string;
   _id: string;
+  image: string;
+  user: {
+    userId: string;
+    username: string;
+    profilePicture: string;
+  };
   updatedAt: string;
 }
 
@@ -20,6 +26,8 @@ const AllCards: FC = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       const response = await axios.get('/posts');
+      console.log(response.data);
+
       setArticles(response.data);
     };
     fetchArticles();

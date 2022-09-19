@@ -1,13 +1,40 @@
 const express = require('express');
-// const app = express();
 const Post = require('../models/Post');
-// const User = require('../models/User');
 const router = require('express').Router();
 
 // get all article
 router.get('/', async (req, res) => {
   try {
-    const allPosts = await Post.find({});
+    const allPosts = await Post.aggregate([
+      {
+        $lookup: {
+          from: 'users',
+          let: { userid: '$userId' },
+          pipeline: [
+            { $match: { $expr: { $eq: [{ $toString: '$_id' }, '$$userid'] } } },
+          ],
+          as: 'createdBy',
+        },
+      },
+      { $unwind: '$createdBy' },
+      {
+        $project: {
+          id: '$id',
+          title: '$title',
+          caption: '$caption',
+          contents: '$contents',
+          image: '$image',
+          createdAt: '$createdAt',
+          updatedAt: '$updatedAt',
+          user: {
+            userId: '$userId',
+            username: '$createdBy.username',
+            profilePicture: '$createdBy.profilePicture',
+          },
+        },
+      },
+    ]);
+
     return res.status(200).json(allPosts);
   } catch (err) {
     console.log('ERROR GET BLOG', err);
