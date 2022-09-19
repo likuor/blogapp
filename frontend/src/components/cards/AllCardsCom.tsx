@@ -26,8 +26,6 @@ const AllCards: FC = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       const response = await axios.get('/posts');
-      console.log(response.data);
-
       setArticles(response.data);
     };
     fetchArticles();

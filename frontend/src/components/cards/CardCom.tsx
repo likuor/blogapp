@@ -36,8 +36,6 @@ interface LoginState {
 const CardCom: FC<DataProps> = (props) => {
   const { user }: LoginState = useContext(AuthContext);
   const { article } = props;
-  console.log(article.user);
-
   const navigate = useNavigate();
 
   const onClick = () => {

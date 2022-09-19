@@ -16,7 +16,5 @@ export const loginCall = async (user: LoginValue, dispatch: any) => {
 };
 
 export const logoutCall = async (dispatch: any) => {
-  console.log('test');
-
   dispatch({ type: 'LOGIN_START' });
 };
