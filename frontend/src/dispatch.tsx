@@ -5,6 +5,13 @@ interface LoginValue {
   password: string | undefined;
 }
 
+interface UpdateValue {
+  username?: string | undefined;
+  email?: string | undefined;
+  description?: string | undefined;
+  profilepicture?: string | undefined;
+}
+
 export const loginCall = async (user: LoginValue, dispatch: any) => {
   dispatch({ type: 'LOGIN_START' });
   try {
@@ -17,4 +24,25 @@ export const loginCall = async (user: LoginValue, dispatch: any) => {
 
 export const logoutCall = async (dispatch: any) => {
   dispatch({ type: 'LOGIN_START' });
+};
+
+export const updateCall = async (
+  update: UpdateValue,
+  userId: string,
+  dispatch: any
+) => {
+  try {
+    const updatedUser = {
+      userId: userId,
+      username: update.username,
+      description: update.description,
+      email: update.email,
+      profilepicture: update.profilepicture,
+    };
+
+    const res = await axios.put(`users/${userId}`, updatedUser);
+    dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
+  } catch (err) {
+    dispatch({ type: 'LOGIN_ERROR', payload: err });
+  }
 };

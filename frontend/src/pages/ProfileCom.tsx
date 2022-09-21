@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import { AuthContext } from '../state/AuthContext';
 import Form from 'react-bootstrap/Form';
 import ButtonCom from '../components/ButtonCom';
-import axios from 'axios';
+import { updateCall } from '../dispatch';
 
 interface LoginState {
   user: {
@@ -26,9 +26,9 @@ const ProfileCom: FC = () => {
   const refDescription = useRef<HTMLInputElement>(null);
   const refEmail = useRef<HTMLInputElement>(null);
   const refProfilePiture = useRef<HTMLInputElement>(null);
+  const { dispatch } = useContext(AuthContext);
 
   const { user }: LoginState = useContext(AuthContext);
-  console.log(user);
 
   const handleSubmit = async () => {
     const updatedUser = {
@@ -39,17 +39,13 @@ const ProfileCom: FC = () => {
       profilePicture: refProfilePiture.current?.value,
     };
 
-    console.log(updatedUser);
-
-    await axios
-      .put(`/api/users/${user?._id}`, updatedUser)
-      .catch((error) => console.log('error', error));
+    updateCall(updatedUser, user?._id, dispatch);
   };
 
   return (
     <Layout>
       <Container fluid>
-        <Form method='put' action={`/api/users/${user?._id}`}>
+        <Form method='put' action={`users/${user?._id}`}>
           <Form.Group className='mb-3' controlId='formGroupText'>
             <Form.Label>Username: {user?.username}</Form.Label>
             <Form.Control
@@ -68,7 +64,7 @@ const ProfileCom: FC = () => {
           </Form.Group>
           <Form.Group className='mb-3' controlId='formGroupText'>
             <Form.Label>Email: {user?.email}</Form.Label>
-            <Form.Control type='text' placeholder='Email' ref={refEmail} />
+            <Form.Control type='email' placeholder='Email' ref={refEmail} />
           </Form.Group>
           <Form.Group className='mb-3' controlId='formGroupText'>
             <Form.Label>
