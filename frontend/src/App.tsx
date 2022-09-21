@@ -16,7 +16,7 @@ function App() {
     <>
       <NavbarCom />
       <Routes>
-        <Route path='/' element={user ? <Home /> : <LoginCom />} />
+        <Route path='/' element={<Home />} />
         <Route
           path='/create'
           element={user ? <CreatePostCom /> : <LoginCom />}
@@ -26,10 +26,7 @@ function App() {
           path='/login'
           element={user ? <Navigate to='/' /> : <LoginCom />}
         />
-        <Route
-          path='/mypage/:id'
-          element={user ? <ProfileCom /> : <LoginCom />}
-        />
+        <Route path='/mypage' element={user ? <ProfileCom /> : <LoginCom />} />
         <Route
           path='/signup'
           element={user ? <Navigate to='/' /> : <SignupCom />}

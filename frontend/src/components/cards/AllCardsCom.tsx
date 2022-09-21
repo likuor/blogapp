@@ -11,6 +11,12 @@ interface articleObj {
   contents: string;
   caption: string;
   _id: string;
+  image: string;
+  user: {
+    userId: string;
+    username: string;
+    profilePicture: string;
+  };
   updatedAt: string;
 }
 

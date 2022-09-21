@@ -1,19 +1,40 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
+import { AuthContext } from '../../state/AuthContext';
 
 interface DataProps {
   article: {
     title: string;
     contents: string;
     caption: string;
-    userId: string;
+    user: {
+      userId: string;
+      username: string;
+      profilePicture: string;
+    };
     _id: string;
     updatedAt: string;
   };
 }
 
+interface LoginState {
+  user: {
+    createdAt: string;
+    description: string;
+    email: string;
+    isAdmin: boolean;
+    password: string;
+    profilePicture: string;
+    updatedAt: string;
+    username: string;
+    __v?: number;
+    _id: string | null;
+  } | null;
+}
+
 const CardCom: FC<DataProps> = (props) => {
+  const { user }: LoginState = useContext(AuthContext);
   const { article } = props;
   const navigate = useNavigate();
 
@@ -27,7 +48,11 @@ const CardCom: FC<DataProps> = (props) => {
   };
 
   return (
-    <Card onClick={onClick} style={{ cursor: 'pointer' }}>
+    <Card
+      onClick={onClick}
+      style={{ cursor: 'pointer', margin: '0.8rem' }}
+      border={article.user.userId === user?._id ? 'primary' : 'none'}
+    >
       <Card.Img
         variant='top'
         src={`${process.env.PUBLIC_URL}/image/blogSample.jpg`}
@@ -35,7 +60,7 @@ const CardCom: FC<DataProps> = (props) => {
       <Card.Body>
         <Card.Title>{article.title}</Card.Title>
         <Card.Text>{article.caption}</Card.Text>
-        <Card.Text>{article.userId}</Card.Text>
+        <Card.Text>{article.user.username}</Card.Text>
       </Card.Body>
       <Card.Footer>
         <small className='text-muted'>Last updated {renderTime()}</small>

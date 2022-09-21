@@ -4,7 +4,7 @@ const app = express();
 const PORT = 8080;
 const mongoose = require('mongoose');
 require('dotenv').config();
-const postRoute = require('./routes/posts');
+const articleRoute = require('./routes/articles');
 const userRoute = require('./routes/users');
 const authRoute = require('./routes/auth');
 
@@ -21,7 +21,7 @@ mongodb: mongoose
 app.use(express.json());
 app.use('/api/users', userRoute);
 app.use('/api/auth', authRoute);
-app.use('/api/posts', postRoute);
+app.use('/api/posts', articleRoute);
 
 app.listen(PORT, () => {
   console.log('Server is lstening');
