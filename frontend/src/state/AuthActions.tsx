@@ -9,3 +9,8 @@ export const LoginError = (error: any) => ({
   type: 'LOGIN_ERROR',
   payload: error,
 });
+
+export const UpdateSuccess = (user: any) => ({
+  type: 'UPDATE_SUCCESS',
+  payload: user,
+});

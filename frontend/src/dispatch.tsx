@@ -39,9 +39,10 @@ export const updateCall = async (
       email: update.email,
       profilepicture: update.profilepicture,
     };
-
     const res = await axios.put(`users/${userId}`, updatedUser);
-    dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
+    // console.log('data', await res.data);
+
+    await dispatch({ type: 'UPDATE_SUCCESS', payload: res.data });
   } catch (err) {
     dispatch({ type: 'LOGIN_ERROR', payload: err });
   }

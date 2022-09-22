@@ -5,7 +5,7 @@ interface LoginState {
 }
 
 interface LoginAction {
-  type: 'LOGIN_START' | 'LOGIN_SUCCESS' | 'LOGIN_ERROR';
+  type: 'LOGIN_START' | 'LOGIN_SUCCESS' | 'LOGIN_ERROR' | 'UPDATE_SUCCESS';
   payload: any;
 }
 
@@ -19,6 +19,15 @@ const AuthReducer = (state: LoginState, action: LoginAction) => {
       };
 
     case 'LOGIN_SUCCESS':
+      return {
+        user: action.payload,
+        isFetching: false,
+        error: false,
+      };
+
+    case 'UPDATE_SUCCESS':
+      // console.log('action here', action);
+
       return {
         user: action.payload,
         isFetching: false,
