@@ -11,7 +11,7 @@ const Layout: FC<LayoutType> = ({ children }) => {
   return (
     <>
       <Container>
-        <Row>
+        <Row className='mt-4'>
           <Col sm={12}>{children}</Col>
         </Row>
       </Container>
