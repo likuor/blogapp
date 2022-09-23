@@ -39,7 +39,7 @@ const ProfileCom: FC = () => {
       profilePicture: refProfilePiture.current?.value,
     };
 
-    updateCall(updatedUser, user?._id, dispatch);
+    updateCall(updatedUser, dispatch);
   };
 
   return (

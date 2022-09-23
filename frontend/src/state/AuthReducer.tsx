@@ -26,8 +26,6 @@ const AuthReducer = (state: LoginState, action: LoginAction) => {
       };
 
     case 'UPDATE_SUCCESS':
-      // console.log('action here', action);
-
       return {
         user: action.payload,
         isFetching: false,

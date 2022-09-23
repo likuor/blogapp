@@ -6,6 +6,7 @@ interface LoginValue {
 }
 
 interface UpdateValue {
+  userId: string;
   username?: string | undefined;
   email?: string | undefined;
   description?: string | undefined;
@@ -26,22 +27,9 @@ export const logoutCall = async (dispatch: any) => {
   dispatch({ type: 'LOGIN_START' });
 };
 
-export const updateCall = async (
-  update: UpdateValue,
-  userId: string,
-  dispatch: any
-) => {
+export const updateCall = async (updateUser: UpdateValue, dispatch: any) => {
   try {
-    const updatedUser = {
-      userId: userId,
-      username: update.username,
-      description: update.description,
-      email: update.email,
-      profilepicture: update.profilepicture,
-    };
-    const res = await axios.put(`users/${userId}`, updatedUser);
-    // console.log('data', await res.data);
-
+    const res = await axios.put(`users/${updateUser.userId}`, updateUser);
     await dispatch({ type: 'UPDATE_SUCCESS', payload: res.data });
   } catch (err) {
     dispatch({ type: 'LOGIN_ERROR', payload: err });

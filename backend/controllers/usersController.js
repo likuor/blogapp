@@ -13,9 +13,13 @@ const getUsers = async (req, res) => {
 const updateUser = async (req, res) => {
   if (req.body.userId === req.params.id || req.body.isAdmin) {
     try {
-      const user = await User.findByIdAndUpdate(req.params.id, {
-        $set: req.body,
-      });
+      const user = await User.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
       return res.status(200).json(user);
     } catch (err) {
       return res.status(500).json(err);
