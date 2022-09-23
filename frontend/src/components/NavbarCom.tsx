@@ -12,7 +12,7 @@ const NavbarCom: FC = () => {
   const navigate = useNavigate();
   const { dispatch } = useContext(AuthContext);
 
-  const hancleLogiout = () => {
+  const handleLogout = () => {
     localStorage.removeItem('user');
     logoutCall(dispatch);
     navigate('/login');
@@ -41,9 +41,7 @@ const NavbarCom: FC = () => {
                 My page
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item onClick={hancleLogiout}>
-                Logout
-              </NavDropdown.Item>
+              <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

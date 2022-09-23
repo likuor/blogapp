@@ -27,6 +27,7 @@ const FormCom: FC = () => {
   const refText = useRef<HTMLInputElement>(null);
   const refCaption = useRef<HTMLInputElement>(null);
   const refContents = useRef<HTMLInputElement>(null);
+  const refCategory = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
     const newPost = {
@@ -34,6 +35,7 @@ const FormCom: FC = () => {
       title: refText.current?.value,
       caption: refCaption.current?.value,
       contents: refContents.current?.value,
+      cateogry: refCategory.current?.value,
     };
 
     axios
@@ -62,6 +64,15 @@ const FormCom: FC = () => {
             placeholder='Contents'
             ref={refContents}
           />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='formGroupText'>
+          <Form.Label>Category</Form.Label>
+          <Form.Select aria-label='Default select example'>
+            <option>Select category</option>
+            <option value='1'>All</option>
+            <option value='2'>English</option>
+            <option value='3'>Programming</option>
+          </Form.Select>
         </Form.Group>
       </Form>
       <ButtonCom
