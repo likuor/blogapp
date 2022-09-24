@@ -21,6 +21,11 @@ const ArticleSchema = new mongoose.Schema(
       required: true,
       max: 400,
     },
+    category: {
+      type: String,
+      required: true,
+      max: 20,
+    },
     image: {
       type: String,
     },
