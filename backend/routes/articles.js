@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const {
   getArticles,
+  getEnglishArticles,
+  getProgrammingArticles,
   getArticleDetail,
   addArticle,
   updateArticle,
@@ -9,6 +11,10 @@ const {
 
 // get all articles
 router.get('/', getArticles);
+
+router.get('/english', getEnglishArticles);
+
+router.get('/programming', getProgrammingArticles);
 
 router.get('/:id', getArticleDetail);
 

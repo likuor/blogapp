@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Layout from '../Layout/Layout';
 import AllCardsCom from '../components/cards/AllCardsCom';
 
-const CardsList: FC = () => {
+const HomeCom: FC = () => {
   return (
     <Layout>
       <AllCardsCom />
@@ -10,4 +10,4 @@ const CardsList: FC = () => {
   );
 };
 
-export default CardsList;
+export default HomeCom;

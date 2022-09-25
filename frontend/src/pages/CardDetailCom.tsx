@@ -10,11 +10,13 @@ import ButtonCom from '../components/ButtonCom';
 import { AuthContext } from '../state/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import ModalCom from '../components/ModalCom';
+import BadgeCom from '../components/BadgeCom';
 
 interface articleObj {
   title: string;
   contents: string;
   caption: string;
+  category: string;
   _id: string;
   userId: string;
   updatedAt: string;
@@ -62,6 +64,7 @@ const CardDetailCom: FC = () => {
         {article ? (
           <>
             <h1>{article.title}</h1> <span>{renderTime()}</span>
+            <BadgeCom category={article.category} />
             <Col md={7}>{article.contents}</Col>
             <Col md={5}>
               <Image
