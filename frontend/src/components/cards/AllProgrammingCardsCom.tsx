@@ -21,12 +21,12 @@ interface articleObj {
   updatedAt: string;
 }
 
-const AllCardsCom: FC = () => {
+const AllProgrammingCardsCom: FC = () => {
   const [articles, setArticles] = useState<articleObj[] | undefined>(undefined);
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const response = await axios.get('/posts');
+      const response = await axios.get('/posts/programming');
       setArticles(response.data);
     };
     fetchArticles();
@@ -58,4 +58,4 @@ const AllCardsCom: FC = () => {
   );
 };
 
-export default AllCardsCom;
+export default AllProgrammingCardsCom;

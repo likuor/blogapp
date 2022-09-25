@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import NavbarCom from './components/NavbarCom';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Home from './pages/Home';
+import HomeCom from './pages/HomeCom';
+import EnglishCom from './pages/EnglishCom';
+import AllProgrammingCardsCom from './pages/ProgrammingCom';
 import CreatePostCom from './pages/CreatePostCom';
 import CardDetailCom from './pages/CardDetailCom';
 import LoginCom from './pages/LoginCom';
@@ -16,7 +18,9 @@ function App() {
     <>
       <NavbarCom />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<HomeCom />} />
+        <Route path='/english' element={<EnglishCom />} />
+        <Route path='/programming' element={<AllProgrammingCardsCom />} />
         <Route
           path='/create'
           element={user ? <CreatePostCom /> : <LoginCom />}
