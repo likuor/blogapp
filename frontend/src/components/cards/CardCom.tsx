@@ -2,12 +2,14 @@ import React, { FC, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import { AuthContext } from '../../state/AuthContext';
+import BadgeCom from '../BadgeCom';
 
 interface DataProps {
   article: {
     title: string;
     contents: string;
     caption: string;
+    category: string;
     user: {
       userId: string;
       username: string;
@@ -61,6 +63,7 @@ const CardCom: FC<DataProps> = (props) => {
         <Card.Title>{article.title}</Card.Title>
         <Card.Text>{article.caption}</Card.Text>
         <Card.Text>{article.user.username}</Card.Text>
+        <BadgeCom category={article.category} />
       </Card.Body>
       <Card.Footer>
         <small className='text-muted'>Last updated {renderTime()}</small>

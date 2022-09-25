@@ -12,6 +12,7 @@ interface articleObj {
   caption: string;
   _id: string;
   image: string;
+  category: string;
   user: {
     userId: string;
     username: string;

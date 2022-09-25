@@ -21,6 +21,7 @@ const getArticles = async (req, res) => {
           caption: '$caption',
           contents: '$contents',
           image: '$image',
+          category: '$category',
           createdAt: '$createdAt',
           updatedAt: '$updatedAt',
           user: {
@@ -52,7 +53,6 @@ const addArticle = async (req, res) => {
   const newPost = new Article(req.body);
   try {
     const savedPost = await newPost.save();
-    // const createPost = await Article.create(req.body);
     return res.status(200).json(savedPost);
   } catch (err) {
     console.log('ERROR POST AN ARTICLE', err);
