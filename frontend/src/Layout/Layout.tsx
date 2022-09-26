@@ -1,22 +1,12 @@
 import React, { FC } from 'react';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 interface LayoutType {
   children: React.ReactNode;
 }
 
 const Layout: FC<LayoutType> = ({ children }) => {
-  return (
-    <>
-      <Container>
-        <Row className='mt-4'>
-          <Col sm={12}>{children}</Col>
-        </Row>
-      </Container>
-    </>
-  );
+  return <Container className='my-4'>{children}</Container>;
 };
 
 export default Layout;
