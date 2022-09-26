@@ -1,10 +1,13 @@
 import React, { FC, useContext, useRef } from 'react';
-import Button from '../../ButtonCom';
+import ButtonCom from '../../ButtonCom';
 import Form from 'react-bootstrap/Form';
 import { loginCall } from '../../../dispatch';
 import { AuthContext } from '../../../state/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
+import StackLayout from '../../../Layout/StackLayout';
 
 const LoginFormCom: FC = () => {
+  const navigate = useNavigate();
   const refEmail = useRef<HTMLInputElement>(null);
   const refPassword = useRef<HTMLInputElement>(null);
   const { dispatch } = useContext(AuthContext);
@@ -46,7 +49,16 @@ const LoginFormCom: FC = () => {
         />
       </Form.Group>
 
-      <Button text='Login' color='primary' type='submit' />
+      <StackLayout direction='vertical'>
+        <ButtonCom text='Login' color='primary' type='submit' />
+        <ButtonCom
+          color='success'
+          text='Sign up'
+          type='button'
+          onClick={() => navigate('/signup')}
+        />
+        <Link to={'/forgotpassword'}>forgot password?</Link>
+      </StackLayout>
     </Form>
   );
 };

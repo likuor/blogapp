@@ -11,6 +11,7 @@ import { AuthContext } from '../state/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import ModalCom from '../components/ModalCom';
 import BadgeCom from '../components/BadgeCom';
+import StackLayout from '../Layout/StackLayout';
 
 interface articleObj {
   title: string;
@@ -75,29 +76,27 @@ const CardDetailCom: FC = () => {
             <Col>
               {user && user._id === article.userId && (
                 <>
-                  <span>
+                  <StackLayout direction='horizontal'>
                     <ButtonCom
                       color='success'
                       text='Edit'
                       onClick={editArticle}
                       type='submit'
                     />
-                  </span>
-                  <span>
                     <ButtonCom
                       color='danger'
                       text='Delete'
                       onClick={deleteArticle}
                       type='submit'
                     />
-                  </span>
-                  <ModalCom
-                    showModal={showModal}
-                    setShowModal={setShowModal}
-                    isUpdated={isUpdated}
-                    setIsUpdated={setIsUpdated}
-                    article={article}
-                  />
+                    <ModalCom
+                      showModal={showModal}
+                      setShowModal={setShowModal}
+                      isUpdated={isUpdated}
+                      setIsUpdated={setIsUpdated}
+                      article={article}
+                    />
+                  </StackLayout>
                 </>
               )}
             </Col>
