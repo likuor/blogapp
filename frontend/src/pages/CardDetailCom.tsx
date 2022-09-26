@@ -11,6 +11,8 @@ import { AuthContext } from '../state/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import ModalCom from '../components/ModalCom';
 import BadgeCom from '../components/BadgeCom';
+import StackLayout from '../Layout/StackLayout';
+import Layout from '../Layout/Layout';
 
 interface articleObj {
   title: string;
@@ -58,13 +60,49 @@ const CardDetailCom: FC = () => {
     setShowModal(true);
   };
 
+  const renderArticleManger = () => {
+    if (user && article && user._id === article.userId) {
+      return (
+        <>
+          <StackLayout direction='horizontal'>
+            <ButtonCom
+              color='success'
+              text='Edit'
+              onClick={editArticle}
+              type='submit'
+            />
+            <ButtonCom
+              color='danger'
+              text='Delete'
+              onClick={deleteArticle}
+              type='submit'
+            />
+            <ModalCom
+              showModal={showModal}
+              setShowModal={setShowModal}
+              isUpdated={isUpdated}
+              setIsUpdated={setIsUpdated}
+              article={article}
+            />
+          </StackLayout>
+        </>
+      );
+    }
+  };
+
   return (
-    <Container>
-      <Row className='justify-content-center'>
-        {article ? (
-          <>
-            <h1>{article.title}</h1> <span>{renderTime()}</span>
-            <BadgeCom category={article.category} />
+    <Layout>
+      {article ? (
+        <>
+          <Row className='justify-content-center'>
+            <Col>{article.title}</Col>
+            <Col>{renderTime()}</Col>
+            <Col>
+              <BadgeCom category={article.category} />
+            </Col>
+            <Col>{renderArticleManger()}</Col>
+          </Row>
+          <Row className='justify-content-center my-4'>
             <Col md={7}>{article.contents}</Col>
             <Col md={5}>
               <Image
@@ -72,37 +110,10 @@ const CardDetailCom: FC = () => {
                 src={`${process.env.PUBLIC_URL}/image/blogSample.jpg`}
               />
             </Col>
-            <Col>
-              {user && user._id === article.userId && (
-                <>
-                  <span>
-                    <ButtonCom
-                      color='success'
-                      text='Edit'
-                      onClick={editArticle}
-                      type='submit'
-                    />
-                  </span>
-                  <span>
-                    <ButtonCom
-                      color='danger'
-                      text='Delete'
-                      onClick={deleteArticle}
-                      type='submit'
-                    />
-                  </span>
-                  <ModalCom
-                    showModal={showModal}
-                    setShowModal={setShowModal}
-                    isUpdated={isUpdated}
-                    setIsUpdated={setIsUpdated}
-                    article={article}
-                  />
-                </>
-              )}
-            </Col>
-          </>
-        ) : (
+          </Row>
+        </>
+      ) : (
+        <Row className='justify-content-center'>
           <Col
             xs='auto'
             style={{
@@ -113,9 +124,9 @@ const CardDetailCom: FC = () => {
           >
             <SpinnerCom />
           </Col>
-        )}
-      </Row>
-    </Container>
+        </Row>
+      )}
+    </Layout>
   );
 };
 

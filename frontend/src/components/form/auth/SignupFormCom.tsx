@@ -1,20 +1,19 @@
 import React, { FC, useRef } from 'react';
-import Button from '../../ButtonCom';
+import ButtonCom from '../../ButtonCom';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import StackLayout from '../../../Layout/StackLayout';
 
 const SignupFormCom: FC = () => {
   const refUserName = useRef<HTMLInputElement>(null);
   const refEmail = useRef<HTMLInputElement>(null);
   const refPassword = useRef<HTMLInputElement>(null);
   const refPasswordConfirmation = useRef<HTMLInputElement>(null);
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
     if (refPassword.current?.value !== refPasswordConfirmation.current?.value) {
       refPasswordConfirmation.current?.setCustomValidity('Password is wrong');
     } else {
@@ -32,6 +31,7 @@ const SignupFormCom: FC = () => {
       }
     }
   };
+
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
       <Form.Group className='mb-3' controlId='signupFormUserName'>
@@ -79,7 +79,20 @@ const SignupFormCom: FC = () => {
         />
       </Form.Group>
 
-      <Button text='Signup' color='primary' type='submit' />
+      <StackLayout direction='vertical'>
+        <ButtonCom
+          color='success'
+          text='Sign up'
+          type='submit'
+          onClick={() => navigate('/signup')}
+        />
+        <ButtonCom
+          text='Login'
+          color='primary'
+          type='button'
+          onClick={() => navigate('/login')}
+        />
+      </StackLayout>
     </Form>
   );
 };
