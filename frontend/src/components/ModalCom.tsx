@@ -34,7 +34,7 @@ const ModalCom: FC<Props> = (props) => {
   const { user }: LoginState = useContext(AuthContext);
   const refText = useRef<HTMLInputElement>(null);
   const refCaption = useRef<HTMLInputElement>(null);
-  const refContents = useRef<HTMLInputElement>(null);
+  const refContents = useRef<HTMLTextAreaElement>(null);
 
   const handleClose = () => setShowModal(false);
 
@@ -85,7 +85,8 @@ const ModalCom: FC<Props> = (props) => {
             <Form.Group className='mb-3' controlId='formGroupText'>
               <Form.Label>Contents</Form.Label>
               <Form.Control
-                type='textarea'
+                as='textarea'
+                rows={20}
                 placeholder='Contents'
                 defaultValue={article.contents}
                 ref={refContents}

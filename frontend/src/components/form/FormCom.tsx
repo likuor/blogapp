@@ -1,4 +1,4 @@
-import React, { FC, useRef, useContext } from 'react';
+import React, { FC, useRef, useContext, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import Layout from '../../Layout/Layout';
@@ -26,8 +26,9 @@ const FormCom: FC = () => {
   const { user }: LoginState = useContext(AuthContext);
   const refText = useRef<HTMLInputElement>(null);
   const refCaption = useRef<HTMLInputElement>(null);
-  const refContents = useRef<HTMLInputElement>(null);
+  const refContents = useRef<HTMLTextAreaElement>(null);
   const refCategory = useRef<HTMLSelectElement>(null);
+  const [file, setFile] = useState<String>();
 
   const handleSubmit = () => {
     const newPost = {
@@ -36,6 +37,7 @@ const FormCom: FC = () => {
       caption: refCaption.current?.value,
       contents: refContents.current?.value,
       category: refCategory.current?.value,
+      image: file,
     };
 
     axios
@@ -60,7 +62,8 @@ const FormCom: FC = () => {
         <Form.Group className='mb-3' controlId='formGroupText'>
           <Form.Label>Contents</Form.Label>
           <Form.Control
-            type='textarea'
+            as='textarea'
+            rows={20}
             placeholder='Contents'
             ref={refContents}
           />
@@ -73,6 +76,18 @@ const FormCom: FC = () => {
             <option value='english'>English</option>
             <option value='programming'>Programming</option>
           </Form.Select>
+        </Form.Group>
+        <Form.Group controlId='formFile' className='mb-3'>
+          <Form.Label>Article Image</Form.Label>
+          <Form.Control
+            type='file'
+            placeholder='image'
+            accept='.png, .jpeg, .jpg'
+            onChange={(e) => {
+              const file = (e.target as HTMLInputElement).files![0].name;
+              setFile(file);
+            }}
+          />
         </Form.Group>
       </Form>
       <ButtonCom
