@@ -130,10 +130,11 @@ const getArticleDetail = async (req, res) => {
 };
 
 const addArticle = async (req, res) => {
+  console.log(req.body);
   const newPost = new Article(req.body);
   try {
-    const savedPost = await newPost.save();
-    return res.status(200).json(savedPost);
+    // const savedPost = await newPost.save();
+    // return res.status(200).json(savedPost);
   } catch (err) {
     console.log('ERROR POST AN ARTICLE', err);
     return res.status(500).send('Article can not be created');

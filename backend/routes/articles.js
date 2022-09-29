@@ -1,4 +1,7 @@
 const router = require('express').Router();
+const multer = require('multer');
+const uploadPic = multer();
+
 const {
   getArticles,
   getEnglishArticles,
@@ -18,7 +21,7 @@ router.get('/programming', getProgrammingArticles);
 
 router.get('/:id', getArticleDetail);
 
-router.post('/create', addArticle);
+router.post('/create', uploadPic.single('file'), addArticle);
 
 router.put('/:id', updateArticle);
 
