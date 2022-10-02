@@ -10,6 +10,7 @@ interface DataProps {
     contents: string;
     caption: string;
     category: string;
+    image?: { data: string; type: string };
     user: {
       userId: string;
       username: string;
@@ -39,6 +40,8 @@ const CardCom: FC<DataProps> = (props) => {
   const { user }: LoginState = useContext(AuthContext);
   const { article } = props;
   const navigate = useNavigate();
+
+  console.log(article.image);
 
   const onClick = () => {
     navigate(`/detail/${article._id}`);

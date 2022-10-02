@@ -130,7 +130,22 @@ const getArticleDetail = async (req, res) => {
 };
 
 const addArticle = async (req, res) => {
-  const newPost = new Article(req.body);
+  console.log('req', req.body.image);
+
+  // const newPost = new Article(req.body);
+  const newPost = new Article({
+    userId: req.body.userId,
+    title: req.body.title,
+    caption: req.body.caption,
+    contents: req.body.contents,
+    category: req.body.category,
+    image: {
+      data: req.body.image.data,
+      contenType: req.body.image.type,
+    },
+  });
+  // console.log(newPost);
+
   try {
     const savedPost = await newPost.save();
     return res.status(200).json(savedPost);
