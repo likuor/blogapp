@@ -28,7 +28,9 @@ const FormCom: FC = () => {
   const refCaption = useRef<HTMLInputElement>(null);
   const refContents = useRef<HTMLTextAreaElement>(null);
   const refCategory = useRef<HTMLSelectElement>(null);
-  const [file, setFile] = useState<String>();
+  // const [file, setFile] = useState<String>();
+  // const [file, setFile] = useState<File | null | undefined>();
+  const [file, setFile] = useState<{ data: string; type: string }>();
 
   const handleSubmit = () => {
     const newPost = {
@@ -84,8 +86,13 @@ const FormCom: FC = () => {
             placeholder='image'
             accept='.png, .jpeg, .jpg'
             onChange={(e) => {
-              const file = (e.target as HTMLInputElement).files![0].name;
-              setFile(file);
+              // const file = (e.target as HTMLInputElement).files![0];
+              // setFile(file);
+
+              const fileName = (e.target as HTMLInputElement).files![0].name;
+              const fileType = (e.target as HTMLInputElement).files![0].type;
+              // const file = (e.target as HTMLInputElement).files![0].name;
+              setFile({ data: fileName, type: fileType });
             }}
           />
         </Form.Group>

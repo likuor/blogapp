@@ -27,7 +27,8 @@ const ArticleSchema = new mongoose.Schema(
       max: 20,
     },
     image: {
-      type: String,
+      data: Buffer,
+      contenType: String,
     },
   },
   { timestamps: true }
