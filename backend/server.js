@@ -8,6 +8,7 @@ require('dotenv').config();
 const articleRoute = require('./routes/articles');
 const userRoute = require('./routes/users');
 const authRoute = require('./routes/auth');
+const cors = require('cors');
 
 mongodb: mongoose
   .connect(process.env.MONGO_URL)
@@ -17,6 +18,7 @@ mongodb: mongoose
   .catch((err) => {
     console.log('ERROR MONGOOSE CONNECTING', err);
   });
+app.use(cors());
 
 //middleware
 app.use(express.json());
