@@ -41,8 +41,6 @@ const CardCom: FC<DataProps> = (props) => {
   const { article } = props;
   const navigate = useNavigate();
 
-  console.log(article.image);
-
   const onClick = () => {
     navigate(`/detail/${article._id}`);
   };

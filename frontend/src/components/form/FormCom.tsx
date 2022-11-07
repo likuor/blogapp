@@ -28,8 +28,6 @@ const FormCom: FC = () => {
   const refCaption = useRef<HTMLInputElement>(null);
   const refContents = useRef<HTMLTextAreaElement>(null);
   const refCategory = useRef<HTMLSelectElement>(null);
-  // const [file, setFile] = useState<String>();
-  // const [file, setFile] = useState<File | null | undefined>();
   const [file, setFile] = useState<{ data: string; type: string }>();
 
   const handleSubmit = () => {
@@ -53,15 +51,15 @@ const FormCom: FC = () => {
   return (
     <Layout>
       <Form>
-        <Form.Group className='mb-3' controlId='formGroupText'>
+        <Form.Group className='mb-3' controlId='formGroupTitle'>
           <Form.Label>Title</Form.Label>
           <Form.Control type='text' placeholder='Title' ref={refText} />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='formGroupText'>
+        <Form.Group className='mb-3' controlId='formGroupCaption'>
           <Form.Label>Caption</Form.Label>
           <Form.Control type='text' placeholder='Caption' ref={refCaption} />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='formGroupText'>
+        <Form.Group className='mb-3' controlId='formGroupContents'>
           <Form.Label>Contents</Form.Label>
           <Form.Control
             as='textarea'
@@ -70,7 +68,7 @@ const FormCom: FC = () => {
             ref={refContents}
           />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='formGroupText'>
+        <Form.Group className='mb-3' controlId='formGroupCategory'>
           <Form.Label>Category</Form.Label>
           <Form.Select aria-label='Default select example' ref={refCategory}>
             <option>Select category</option>
@@ -84,14 +82,11 @@ const FormCom: FC = () => {
           <Form.Control
             type='file'
             placeholder='image'
+            name='formFile'
             accept='.png, .jpeg, .jpg'
             onChange={(e) => {
-              // const file = (e.target as HTMLInputElement).files![0];
-              // setFile(file);
-
               const fileName = (e.target as HTMLInputElement).files![0].name;
               const fileType = (e.target as HTMLInputElement).files![0].type;
-              // const file = (e.target as HTMLInputElement).files![0].name;
               setFile({ data: fileName, type: fileType });
             }}
           />

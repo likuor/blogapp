@@ -1,7 +1,8 @@
 // const path = require('path');
 const express = require('express');
 const app = express();
-const PORT = 8080;
+// const PORT = 8080;
+const PORT = 'https://blogapp-back.onrender.com';
 const mongoose = require('mongoose');
 require('dotenv').config();
 const articleRoute = require('./routes/articles');

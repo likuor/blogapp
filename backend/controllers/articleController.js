@@ -130,9 +130,13 @@ const getArticleDetail = async (req, res) => {
 };
 
 const addArticle = async (req, res) => {
-  console.log('req', req.body.image);
+  // if (!req.file) {
+  //   console.log('No file received');
+  //   return res.send({
+  //     success: false,
+  //   });
+  // }
 
-  // const newPost = new Article(req.body);
   const newPost = new Article({
     userId: req.body.userId,
     title: req.body.title,
@@ -144,7 +148,8 @@ const addArticle = async (req, res) => {
       contenType: req.body.image.type,
     },
   });
-  // console.log(newPost);
+
+  console.log('here', newPost.image);
 
   try {
     const savedPost = await newPost.save();

@@ -3,13 +3,13 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/image');
+    cb(null, '../public/images/');
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
 });
-const uploadPic = multer({ storage: storage }).single('file');
+const upload = multer({ storage });
 
 const {
   getArticles,
@@ -30,7 +30,7 @@ router.get('/programming', getProgrammingArticles);
 
 router.get('/:id', getArticleDetail);
 
-router.post('/create', uploadPic, addArticle);
+router.post('/create', upload.any(), addArticle);
 
 router.put('/:id', updateArticle);
 
