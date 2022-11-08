@@ -13,7 +13,7 @@ const LoginFormCom: FC = () => {
   const { dispatch } = useContext(AuthContext);
 
   const handleSubmit = (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
     loginCall(
       {
         email: refEmail.current?.value,
