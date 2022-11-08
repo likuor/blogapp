@@ -41,7 +41,7 @@ const FormCom: FC = () => {
     };
 
     axios
-      .post('/posts/create', newPost)
+      .post(process.env.REACT_APP_SERVER_URL + '/posts/create', newPost)
       .then(() => {
         navigate('/');
       })

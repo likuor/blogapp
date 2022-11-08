@@ -48,7 +48,7 @@ const ModalCom: FC<Props> = (props) => {
     };
 
     axios
-      .put(`/posts/${article._id}`, newPost)
+      .put(process.env.REACT_APP_SERVER_URL + `/posts/${article._id}`, newPost)
       .then(() => {
         handleClose();
         setIsUpdated(() => !isUpdated);

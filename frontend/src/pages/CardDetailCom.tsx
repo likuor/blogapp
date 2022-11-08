@@ -50,7 +50,7 @@ const CardDetailCom: FC = () => {
 
   const deleteArticle = () => {
     axios
-      .delete(`/posts/${params.id}`)
+      .delete(process.env.REACT_APP_SERVER_URL + `/posts/${params.id}`)
       .then(() => {
         navigate('/');
       })
