@@ -25,7 +25,7 @@ const SignupFormCom: FC = () => {
         };
 
         await axios.post(
-          process.env.REACT_APP_SERVER_URL + 'auth/signup',
+          process.env.REACT_APP_SERVER_URL + '/auth/signup',
           user
         );
         navigate('/login');
