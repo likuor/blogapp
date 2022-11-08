@@ -26,7 +26,12 @@ const AllCardsCom: FC = () => {
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const response = await axios.get('/posts');
+      const response = await axios.get(
+        process.env.REACT_APP_SERVER_URL + '/posts'
+      );
+      console.log('sss');
+      console.log(response);
+
       setArticles(response.data);
     };
     fetchArticles();

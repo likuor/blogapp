@@ -26,7 +26,9 @@ const AllProgrammingCardsCom: FC = () => {
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const response = await axios.get('/posts/programming');
+      const response = await axios.get(
+        process.env.REACT_APP_SERVER_URL + '/posts/programming'
+      );
       setArticles(response.data);
     };
     fetchArticles();
