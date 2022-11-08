@@ -29,9 +29,6 @@ const AllCardsCom: FC = () => {
       const response = await axios.get(
         process.env.REACT_APP_SERVER_URL + '/posts'
       );
-      console.log('sss');
-      console.log(response);
-
       setArticles(response.data);
     };
     fetchArticles();
