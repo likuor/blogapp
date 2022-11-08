@@ -33,7 +33,9 @@ const CardDetailCom: FC = () => {
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const response = await axios.get(`/posts/${params.id}`);
+      const response = await axios.get(
+        process.env.REACT_APP_SERVER_URL + `/posts/${params.id}`
+      );
       setArticle(response.data);
     };
     fetchArticles();

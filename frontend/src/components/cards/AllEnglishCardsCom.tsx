@@ -26,7 +26,9 @@ const AllEnglishCardsCom: FC = () => {
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const response = await axios.get('/posts/english');
+      const response = await axios.get(
+        process.env.REACT_APP_SERVER_URL + '/posts/english'
+      );
       setArticles(response.data);
     };
     fetchArticles();

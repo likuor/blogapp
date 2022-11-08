@@ -24,7 +24,10 @@ const SignupFormCom: FC = () => {
           password: refPasswordConfirmation.current?.value,
         };
 
-        await axios.post('auth/signup', user);
+        await axios.post(
+          process.env.REACT_APP_SERVER_URL + 'auth/signup',
+          user
+        );
         navigate('/login');
       } catch (err) {
         console.log(err);
