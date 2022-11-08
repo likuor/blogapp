@@ -20,15 +20,11 @@ mongodb: mongoose
   });
 
 //middleware
+app.use(cors());
 app.use(express.json());
 app.use('/api/users', userRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/posts', articleRoute);
-app.use(
-  cors({
-    origin: ['https://localhost:8080', 'https://blogapp-back.onrender.com'],
-  })
-);
 
 app.listen(PORT, () => {
   console.log('Server is lstening');
