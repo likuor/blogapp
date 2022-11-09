@@ -13,7 +13,7 @@ const SignupFormCom: FC = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e: any) => {
-    // e.preventDefault();
+    e.preventDefault();
     if (refPassword.current?.value !== refPasswordConfirmation.current?.value) {
       refPasswordConfirmation.current?.setCustomValidity('Password is wrong');
     } else {
